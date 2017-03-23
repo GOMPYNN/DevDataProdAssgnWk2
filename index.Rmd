@@ -8,25 +8,33 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-## Here Some Text about the map
+## Soccer Stadiums in Rotterdam Netherlands
 
-## Leaflet Map (now an example from the course presentation)
+The map shows the soccer stadiums of the three professional soccer clubs in Rotterdam. The icon is the flag of Rotterdam. The popups are links to the official websites of the clubs.
+
+## Leaflet Map with the Soccer Stadiums
 
 ```{r, echo=FALSE}
 library(leaflet)
 set.seed(2017-03-23)
-hopkinsIcon <- makeIcon(
-  iconUrl = "http://brand.jhu.edu/content/uploads/2014/06/university.shield.small_.blue_.png",
+rdmIcon <- makeIcon(
+  iconUrl = "D:/Documents/Coursera/repos/DevDataProdAssgnWk2/flagRot.png",
   iconWidth = 31*215/230, iconHeight = 31,
   iconAnchorX = 31*215/230/2, iconAnchorY = 16
 )
 
-hopkinsLatLong <- data.frame(
-  lat = c(39.2973166, 39.3288851, 39.2906617, 39.2970681, 39.2824806),
-  lng = c(-76.5929798, -76.6206598, -76.5469683, -76.6150537, -76.6016766))
+soccerSites <- c(
+  "<a href='https://www.feyenoord.nl/'>Feyenoord Rotterdam (The Best)</a>",
+  "<a href='https://www.sparta-rotterdam.nl/'>Sparta Rotterdam</a>",
+  "<a href='http://sbvexcelsior.nl/'>Excelsior Rotterdam</a>"
+)
 
-hopkinsLatLong %>% 
+awk2LatLong <- data.frame(
+  lat = c(51.8896664413, 51.919485, 51.916944 ),
+  lng = c(4.52061625086, 4.433619, 4.520556))
+
+awk2LatLong %>% 
   leaflet() %>%
   addTiles() %>%
-  addMarkers(icon = hopkinsIcon)
+  addMarkers(icon = rdmIcon, popup = soccerSites)
 ```
